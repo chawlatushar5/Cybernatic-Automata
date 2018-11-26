@@ -1,0 +1,56 @@
+plugins {
+    id 'java'
+    id 'jacoco'
+    id 'application'
+}
+
+mainClassName = "automata.Examples.Driver"
+
+group 'drexel.cs481'
+version '1.0-RELEASE'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+jacoco {
+    version '0.8.1'
+}
+
+dependencies {
+    compile group: 'org.projectlombok', name: 'lombok', version: '1.16.20'
+    compile group: 'com.google.guava', name: 'guava', version: '25.0-jre'
+    compile group: 'org.springframework', name: 'spring-context', version: '5.0.0.RELEASE'
+
+    testCompile group: 'org.testng', name:'testng', version: '6.11'
+    testCompile group: 'org.springframework', name: 'spring-test', version: '5.0.0.RELEASE'
+    testCompile group: 'org.mockito', name: 'mockito-core', version: '2.17.0'
+}
+
+test {
+    exclude '**/*IntegTest*'
+    include '**/*Test*'
+    testLogging {
+        events "passed", "failed", "skipped"
+        exceptionFormat "full"
+        showCauses = true
+        showExceptions = true
+        showStackTraces = true
+    }
+    useTestNG()
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled false
+        csv.enabled false
+        html.enabled true
+    }
+}
+
+build {
+    dependsOn jacocoTestReport
+}

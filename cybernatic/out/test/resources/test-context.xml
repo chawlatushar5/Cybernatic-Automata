@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- Model -->
+    <bean id="state" class="automata.model.State">
+        <constructor-arg name="number" value="1" />
+    </bean>
+    <bean id="alphabet" class="automata.model.Alphabet">
+        <constructor-arg name="symbol" value="a" />
+    </bean>
+    <bean id="transition" class="automata.model.Transition">
+        <constructor-arg name="alphabet" ref="alphabet" />
+        <constructor-arg name="state" ref="state" />
+    </bean>
+
+</beans>
